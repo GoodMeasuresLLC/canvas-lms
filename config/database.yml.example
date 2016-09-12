@@ -21,3 +21,9 @@ production:
   username: canvas
   password: your_password
   timeout: 5000
+
+staging:
+  adapter: postgresql
+  encoding: utf8
+  database: canvas_development
+  timeout: 5000

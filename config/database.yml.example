@@ -25,5 +25,5 @@ production:
 staging:
   adapter: postgresql
   encoding: utf8
-  database: canvas_development
+  database: canvas_staging
   timeout: 5000

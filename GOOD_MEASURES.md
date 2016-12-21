@@ -61,19 +61,23 @@ Get new node packages
 
 `bundle exec rake canvas:compile_assets`
 
+### Migrate
+
+`bundle exec rake db:migrate`
+
 ### Restart
 
 The restarts may need to be specific to each server.  For instance, don't start
 puma on the delayed job servers and vice-versa.
 
-Puma Restart
+Puma Restart (production-canvas)
 
 ```
 sudo kill -9 $(cat /mnt/canvas/tmp/pids/puma.pid)
 bundle exec puma -C config/puma.rb -d
 ```
 
-Delayed Job Restart
+Delayed Job Restart (production-queue)
 
 `./script/delayed_job restart`
 
@@ -92,6 +96,8 @@ rm Gemfile.lock
 bundle install --path vendor/bundle
 npm install
 bundle exec rake canvas:compile_assets
+bundle exec rake db:migrate
 ```
 
-Now, restart your servers (individual restarts)
+Now, restart your servers (individual restarts, see above)
+

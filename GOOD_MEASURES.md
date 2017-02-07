@@ -101,3 +101,10 @@ bundle exec rake db:migrate
 
 Now, restart your servers (individual restarts, see above)
 
+# Other Notes
+
+This might fix asset problems locally
+
+```
+bundle exec rake brand_configs:generate_and_upload_all
+```

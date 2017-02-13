@@ -24,7 +24,7 @@ require 'net/smtp'
 config = {
   :domain => "unknowndomain.example.com",
   :delivery_method => :smtp,
-}.merge((ConfigFile.load("outgoing_mail") || {}).symbolize_keys)
+}.merge((ConfigFile.load("outgoing_mail") || {}).deep_symbolize_keys)
 
 [:authentication, :delivery_method].each do |key|
   config[key] = config[key].to_sym if config.has_key?(key)
@@ -41,7 +41,7 @@ Rails.configuration.to_prepare do
   IncomingMailProcessor::MailboxAccount.reply_to_enabled = config[:reply_to_disabled].blank?
 end
 
-# delivery_method can be :smtp, :sendmail, :letter_opener, or :test
+# delivery_method can be :smtp, :sendmail, :letter_opener, :mail_gate, or :test
 ActionMailer::Base.delivery_method = config[:delivery_method]
 
 ActionMailer::Base.perform_deliveries = config[:perform_deliveries] if config.has_key?(:perform_deliveries)
@@ -51,4 +51,8 @@ when :smtp
   ActionMailer::Base.smtp_settings.merge!(config)
 when :sendmail
   ActionMailer::Base.sendmail_settings.merge!(config)
+when :mail_gate
+  config[:delivery_method] = :smtp
+  config[:whitelist] = eval(config[:whitelist])
+  ActionMailer::Base.mail_gate_settings.merge!(config)
 end

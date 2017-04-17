@@ -10,3 +10,6 @@ production:
   # defaults to true for production, false for test/development
   ssl: true
   # files_domain: "canvasfiles.example.com"
+
+staging:
+  domain: "canvas.staging-goodmeasures.com"

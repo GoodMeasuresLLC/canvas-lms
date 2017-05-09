@@ -1,0 +1,6 @@
+ desc "Get revision info"
+ task :get_revision_info do
+   on roles(:console_host) do
+     execute :'tail -1 /mnt/code/revisions.log' 
+   end
+end

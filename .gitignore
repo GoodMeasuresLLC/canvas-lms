@@ -31,7 +31,6 @@ app/stylesheets/brandable_css_brands
 /db/*.sqlite*
 /db/*sql
 /exports/
-Gemfile.lock
 Gemfile.lock.5
 /log/
 mkmf.log

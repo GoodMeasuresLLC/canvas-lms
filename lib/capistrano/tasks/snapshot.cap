@@ -1,0 +1,8 @@
+namespace :util do
+  desc "take a snapshot of the codebase volume and update the autoscale launch config"
+  task :snapshot_codebase_volume do
+    on roles(:snappable) do
+      execute "/etc/goodmeasures/autoscaling/snapshot.sh"
+    end
+  end
+end

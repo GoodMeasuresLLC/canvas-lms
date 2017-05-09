@@ -1,0 +1,16 @@
+task :verify do
+  on roles(:all) do |host|
+    run_locally do
+      prompt = "You are deploying to PRODUCTION. Press any key to continue or CTRL-C to cancel."
+
+      ask(:prompt, prompt)
+
+      execute "echo \"About to deploy\""
+      #set(:branch, tag_branch_target)
+    end
+
+  end
+end
+
+before 'deploy:check', :verify 
+

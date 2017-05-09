@@ -1,0 +1,5 @@
+namespace :load do
+  task :defaults do
+    load 'lib/aws_setup.rb'
+  end
+end

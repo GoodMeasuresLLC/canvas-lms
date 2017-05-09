@@ -7,7 +7,16 @@ group :development do
   gem 'letter_opener', '1.4.1'
   gem 'spring', '2.0.0'
   gem 'spring-commands-rspec', '1.0.4'
+  #capistrano deploys
 
+  gem 'elbas'
+  gem 'capistrano', :require => false
+  gem 'capistrano-rails'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rbenv'
+  gem 'capistrano3-puma'
+  gem 'capistrano-maintenance', :require => false
+  gem 'slackistrano', :require => false
   # Option to DISABLE_RUBY_DEBUGGING is helpful IDE-based debugging.
   # The ruby debug gems conflict with the IDE-based debugger gem.
   # Set this option in your dev environment to disable.

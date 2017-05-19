@@ -1,7 +1,22 @@
 module Canvas::LiveEvents
+  def self.send_event?(event_name, payload, context)
+    return true if ['submission_updated', 'submission_created'].include?(event_name)
+
+    case event_name
+    when 'discussion_entry_created'
+      !payload.has_key?(:parent_discussion_entry_id)
+    when 'asset_accessed'
+      payload[:asset_type] == 'assignment' && payload[:role] == 'StudentEnrollment'
+    else
+      false
+    end
+  end
+
   def self.post_event_stringified(event_name, payload, context = nil)
-    StringifyIds.recursively_stringify_ids(payload)
-    LiveEvents.post_event(event_name, payload, Time.zone.now, context)
+    if send_event?(event_name, payload, context)
+      StringifyIds.recursively_stringify_ids(payload)
+      LiveEvents.post_event(event_name, payload, Time.zone.now, context)
+    end
   end
 
   def self.amended_context(canvas_context)

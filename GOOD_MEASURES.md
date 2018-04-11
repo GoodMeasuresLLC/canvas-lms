@@ -108,3 +108,11 @@ This might fix asset problems locally
 ```
 bundle exec rake brand_configs:generate_and_upload_all
 ```
+
+This might also help locally
+
+```
+gem install bundler -v 1.13.3
+bundler _1.13.3_ install --path vendor/bundle
+bundler _1.13.3_ exec rails s --port 4000
+```
